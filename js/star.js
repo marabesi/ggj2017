@@ -4,9 +4,12 @@ var starFactory = function(game, quantity, speed) {
 
   for (var i = 0; i < quantity; i++)
   {
-    var single = group.create(i * 70, 0, 'star');
+    var y = getRandomInt(0, 900);
+    var x = getRandomInt(100, 200);
 
-   single.body.gravity.y = 120;
+    var single = group.create(700 + x, y, 'star');
+
+   single.body.gravity.x -= 100;
    single.body.bounce.y = 0.7 + Math.random() * 0.2;
  }
 

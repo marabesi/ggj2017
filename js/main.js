@@ -33,7 +33,9 @@ function create() {
 
   game.camera.follow(player);
 
-  ledge = platforms.create(400, 400, 'ground');
+  setInterval(function() {
+    stars = starFactory(game, 2, 2);
+  }, 2000);
 }
 
 function update() {
@@ -42,19 +44,25 @@ function update() {
 
   setupKeyboard(player, cursors, hitPlatform);
 
-  // game.physics.arcade.collide(stars, platforms);
-  //
-  // game.physics.arcade.overlap(player, stars, collectStar, null, this);
+  // game.physics.arcade.collide(stars, player);
+
+  game.physics.arcade.overlap(player, stars, collectStar, null, this);
 
   sky.tilePosition.x -= 2;
 
-  ledge.body.x -= 2;
+  // ledge.body.x -= 2;
 }
 
 function collectStar(player, star)
 {
-  //star.kill();
+  star.kill();
 
   score += 10;
   scoreText.text = 'Score: ' + score;
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
 }
